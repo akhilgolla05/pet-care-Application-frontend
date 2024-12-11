@@ -27,6 +27,10 @@ export const dateTimeFormatter = (date,time)=>{
   return {formattedDate,formattedTime};
 }
 
+export const formatAppointmentStatus = (status)=>{
+  return status.toLowerCase().replace(/_/g,"-");
+}
+
 export const UserType = {
   PATIENT:"PATIENT",
   VET:"VET",

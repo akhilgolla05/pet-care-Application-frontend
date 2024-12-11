@@ -46,7 +46,7 @@ const PetEntry = ({ pet, index, removePet, canRemove, handleInputChange }) => {
       </fieldset>
 
       <Form.Group as={Col} className='mb-4'>
-        <PetColorSelector value={pet.petColr} onChange={handleInputChange} />
+        <PetColorSelector value={pet.petColor} onChange={handleInputChange} />
       </Form.Group>
 
       <fieldset className='field-set mb-4'>

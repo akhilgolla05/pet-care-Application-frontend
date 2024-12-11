@@ -1,5 +1,15 @@
 /* Start Admin Dashboard */
 
+.inactive{
+  color:orange;
+  font-weight: bold;
+}
+
+.active{
+  color:green;
+  font-weight: bold;
+}
+
 .admin-body {
   margin: 0;
   background-color: rgba(13, 14, 14, 0.947);

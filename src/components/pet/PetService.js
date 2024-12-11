@@ -27,3 +27,21 @@ export async function getAllPetBreeds(petType) {
     throw error;
   }
 }
+
+export const updatePet = async (petId, updatePet)=>{
+  try{
+    const response =  await api.put(`/pets/pet/${petId}/update`, updatePet);
+    return response.data;
+  }catch (error) {
+    throw error;
+  }
+}
+
+export const deletePet = async (petId)=>{
+  try{
+    const response =  await api.delete(`/pets/pet/${petId}/delete`);
+    return response.data;
+  }catch (error) {
+    throw error;
+  }
+}

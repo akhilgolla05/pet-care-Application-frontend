@@ -1,7 +1,9 @@
 import React from "react";
 import { Nav, Navbar, Container, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 const NavBar = () => {
+
+  const userId = useParams()
   return (
     <Navbar expand="lg" sticky="top" className="nav-bg">
       <Container>
@@ -20,14 +22,14 @@ const NavBar = () => {
         </Nav>
         <Nav>
           <NavDropdown title="Account" id="basic-nav-dropdown">
-            <NavDropdown.Item to={"/user-dashboard"} as={Link}>
+            <NavDropdown.Item to={"/register-user"} as={Link}>
               Register
             </NavDropdown.Item>
             <NavDropdown.Item to={"/user-dashboard"} as={Link}>
               Login
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item to={"/user-dashboard"} as={Link}>
+            <NavDropdown.Item to={`/user-dashboard/${userId}/my-dashboard`} as={Link}>
               My Dashboard
             </NavDropdown.Item>
             <NavDropdown.Item to={"/admin-dashboard"} as={Link}>
