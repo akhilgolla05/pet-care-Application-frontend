@@ -12,6 +12,7 @@ import Login from "./components/auth/Login";
 import UserProfile from "./components/user/UserProfile";
 import UserDashboard from "./components/user/UserDashboard";
 import UserUpdate from "./components/user/UserUpdate";
+import AdminDashboard from "./components/admin/AdminDashboard";
 function App() {
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<RootLayout/>}>
@@ -23,6 +24,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/user-dashboard/:userId/my-dashboard" element={<UserDashboard/>}/>
       <Route path="/update-user/:userId/update" element={<UserUpdate/>}/>
+      <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
     </Route>
   ))
   return (

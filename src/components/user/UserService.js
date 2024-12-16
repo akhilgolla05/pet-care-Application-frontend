@@ -59,3 +59,91 @@ export const deleteUser = async (userId) => {
     }
 }
 
+export const countVeterinarians = async () => {
+    try{
+        const response = await api.get("/users/count/veterinarians")
+        return response.data;
+    }catch(error){
+        throw error;
+    }
+}
+
+export const countPatients = async () => {
+    try{
+        const response = await api.get("/users/count/patients")
+        return response.data;
+    }catch(error){
+        throw error;
+    }
+}
+
+export const countUsers= async () => {
+    try{
+        const response = await api.get("/users/count/users")
+        return response.data;
+    }catch(error){
+        throw error;
+    }
+}
+
+export const countAppointments= async () => {
+    try{
+        const response = await api.get("/appointments/count/appointments")
+        return response.data;
+    }catch(error){
+        throw error;
+    }
+}
+
+export const getAggregateUsersByMonthAndType= async () => {
+    try{
+        const response = await api.get("/users/aggregated-users")
+        return response.data;
+    }catch(error){
+        throw error;
+    }
+}
+
+export const getAggregatedAccountsByAccountStatus = async ()=>{
+    try{
+        const response = await api.get("/users/account/aggregated-by-status");
+        return response.data;
+    }catch(error){
+        throw error;
+    }
+}
+
+export const aggregateVetBySpecialization = async () => {
+    try {
+      const response = await api.get("/veterinarians/vet/get-by-specialization");
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
+  /* This function disables a user account */
+export async function lockUserAccount(userId) {
+    try {
+      const result = await api.put(`/users/account/${userId}/lock-user-account`);
+      return result.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
+  /* This function disables a user account */
+  export async function unLockUserAccount(userId) {
+    try {
+      const result = await api.put(
+        `/users/account/${userId}/unLock-user-account`
+      );
+      return result.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
+

@@ -61,4 +61,13 @@ export const getAppointmentById = async (appointmentId) =>{
   }
 }
 
+export const getAppointmentsSummary = async ()=>{
+  try{
+    const response = await api.get("/appointments/summary/appointments-summary");
+    return response.data;
+  }catch(error){
+    throw error;
+  }
+}
+
 /*   `/appointments/book-appointment/${senderId}/${recipientId}` */
