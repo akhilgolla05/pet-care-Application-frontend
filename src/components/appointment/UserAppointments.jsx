@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Accordion, Button, Col, Container, Row } from "react-bootstrap";
+import { Accordion, Alert, Button, Col, Container, Row } from "react-bootstrap";
 import ReactDatePicker from "react-datepicker";
 import PetsTable from "../pet/PetsTable";
 import { formatAppointmentStatus, UserType } from "../utils/utilities";
@@ -240,6 +240,13 @@ const UserAppointments = ({ user, appointments: initialAppointments }) => {
                     />
                   )}
                 </Row>
+
+                {
+                  showErrorAlert && <AlertMessage type={"danger"} message={errorMessage}/>
+                }
+                {
+                  showSuccessAlert && <AlertMessage type={"success"} message={successMessage}/>
+                }
 
                 {user.userType === "PATIENT" && (
                   <Link to={`/book-appointment/${recepientId}/new-appointment`}>

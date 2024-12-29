@@ -51,8 +51,13 @@ const Rating = ({ veterinarianId, onReviewSubmit }) => {
         onReviewSubmit();
       }
     } catch (error) {
-      setErrorMessage(error.message);
-      setShowErrorAlert(true);
+      if (error.status == 401) {
+        setErrorMessage("You must be logged in to Submit a Review.");
+        setShowErrorAlert(true);
+      } else {
+        setErrorMessage(error.message);
+        setShowErrorAlert(true);
+      }
     }
   };
 

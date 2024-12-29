@@ -48,7 +48,7 @@ const BookAppointment = () => {
   } = UseMessageAlerts();
 
   const { recipientId } = useParams();
-  const senderId = 3;
+  const senderId = 18;
 
   const handleDateChange = (date) => {
     setFormData((prevState) => ({
@@ -109,10 +109,7 @@ const BookAppointment = () => {
     // Extract appointmentDate and appointmentTime from formData
     const { date, time } = formData;
     // Use dateTimeFormatter to format the date and time
-    const { formattedDate, formattedTime } = dateTimeFormatter(
-      date,
-      time
-    );
+    const { formattedDate, formattedTime } = dateTimeFormatter(date, time);
     // Constructing an array of pet objects from formData.pets
     const pets = formData.pets.map((pet) => ({
       name: pet.petName,
@@ -139,8 +136,14 @@ const BookAppointment = () => {
       handleReset();
       setShowSuccessAlert(true);
     } catch (error) {
-      setErrorMessage(error.response.data.message);
-      setShowErrorAlert(true);
+      console.log(error.message);
+      if (error.status == 401) {
+        setErrorMessage("You must be logged in to book an appointment.");
+        setShowErrorAlert(true);
+      } else {
+        setErrorMessage(error.message);
+        setShowErrorAlert(true);
+      }
     } finally {
       setIsProcessing(false);
     }
@@ -166,29 +169,29 @@ const BookAppointment = () => {
   };
 
   return (
-    <Container className='mt-5'>
-      <Row className='justify-content-center'>
+    <Container className="mt-5">
+      <Row className="justify-content-center">
         <Col lg={6} md={8} sm={12}>
           <Form onSubmit={handleSubmit}>
-            <Card className='shadow mb-5'>
-              <Card.Header as='h5' className='text-center'>
+            <Card className="shadow mb-5">
+              <Card.Header as="h5" className="text-center">
                 {" "}
                 Appointment Booking Form
               </Card.Header>
               <Card.Body>
-                <fieldset className='field-set mb-4'>
-                  <legend className='text-center'>
+                <fieldset className="field-set mb-4">
+                  <legend className="text-center">
                     Appointment Date and Time
                   </legend>
-                  <Form.Group as={Row} className='mb-4'>
+                  <Form.Group as={Row} className="mb-4">
                     <Col>
                       <DatePicker
                         selected={formData.date}
                         onChange={handleDateChange}
-                        dateFormat='yyyy-MM-dd'
-                        className='form-control'
+                        dateFormat="yyyy-MM-dd"
+                        className="form-control"
                         minDate={new Date()}
-                        placeholderText='Choose a date'
+                        placeholderText="Choose a date"
                         required
                       />
                     </Col>
@@ -200,27 +203,27 @@ const BookAppointment = () => {
                         showTimeSelect
                         showTimeSelectOnly
                         timeIntervals={30}
-                        dateFormat='HH:mm'
-                        className='form-control'
-                        placeholderText='Select time'
+                        dateFormat="HH:mm"
+                        className="form-control"
+                        placeholderText="Select time"
                         required
                       />
                     </Col>
                   </Form.Group>
                 </fieldset>
 
-                <Form.Group className='mb-4'>
+                <Form.Group className="mb-4">
                   <Form.Label>Reason for appointment</Form.Label>
                   <Form.Control
-                    as='textarea'
+                    as="textarea"
                     rows={3}
-                    name='reason'
+                    name="reason"
                     onChange={handleInputChange}
                     value={formData.reason}
                     required
                   />
                 </Form.Group>
-                <h5 className='text-center'>Appointment Pet Information</h5>
+                <h5 className="text-center">Appointment Pet Information</h5>
                 {formData.pets.map((pet, index) => (
                   <PetEntry
                     key={index}
@@ -240,30 +243,32 @@ const BookAppointment = () => {
                   <AlertMessage type={"success"} message={successMessage} />
                 )}
 
-                <div className='d-flex justify-content-center mb-3'>
+                <div className="d-flex justify-content-center mb-3">
                   <OverlayTrigger overlay={<Tooltip>Add pets</Tooltip>}>
-                    <Button size='sm' onClick={addPet} className='me-2'>
+                    <Button size="sm" onClick={addPet} className="me-2">
                       <FaPlus />
                     </Button>
                   </OverlayTrigger>
 
                   <Button
-                    type='submit'
-                    variant='outline-primary'
-                    size='sm'
-                    className='me-2'
-                    disabled={isProcessing}>
+                    type="submit"
+                    variant="outline-primary"
+                    size="sm"
+                    className="me-2"
+                    disabled={isProcessing}
+                  >
                     {isProcessing ? (
-                      <ProcessSpinner message='Booking appointment, please wait...' />
+                      <ProcessSpinner message="Booking appointment, please wait..." />
                     ) : (
                       "  Book Appointment"
                     )}
                   </Button>
 
                   <Button
-                    variant='outline-info'
-                    size='sm'
-                    onClick={handleReset}>
+                    variant="outline-info"
+                    size="sm"
+                    onClick={handleReset}
+                  >
                     Reset
                   </Button>
                 </div>
